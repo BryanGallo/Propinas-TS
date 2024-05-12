@@ -3,3 +3,8 @@ export type MenuItem = {
     name: string;
     price: number;
 };
+
+//Herencia a MenuItem
+export type OrderItem = MenuItem & {
+    quantity: number;
+};
