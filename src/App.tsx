@@ -1,5 +1,5 @@
 import Header from "./components/Header";
-import MenuItem from "./components/MenuItem";
+import Menu from "./components/Menu";
 import { menuItems } from "./data/db";
 function App() {
     return (
@@ -7,11 +7,13 @@ function App() {
             <Header />
             <main className="max-w-7xl mx-auto py-20 grid md:grid-cols-2">
                 <div>
-                    <h2 className="">Menu</h2>
-                    {menuItems &&
-                        menuItems.map((item) => (
-                            <MenuItem key={item.id} item={item} />
-                        ))}
+                    <h2 className="text-4xl font-bold text-center ">Menu</h2>
+                    <div className="space-y-2 mt-5">
+                        {menuItems &&
+                            menuItems.map((item) => (
+                                <Menu key={item.id} item={item} />
+                            ))}
+                    </div>
                 </div>
                 <div>
                     <h2 className="">Consumo</h2>
