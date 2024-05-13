@@ -1,5 +1,8 @@
-import React from "react";
-
+import { Dispatch } from "react";
+type TipPercentageFormProps = {
+    // setTip: React.Dispatch<React.SetStateAction<number>>; si no importar Dispatch
+    setTip: Dispatch<React.SetStateAction<number>>;
+};
 const tipOptions = [
     {
         id: "tip-10",
@@ -17,7 +20,7 @@ const tipOptions = [
         label: "50%",
     },
 ];
-export default function TipPercentageForm() {
+export default function TipPercentageForm({ setTip }: TipPercentageFormProps) {
     return (
         <div>
             <h3 className="font-black text-2xl">Propina:</h3>
@@ -30,6 +33,7 @@ export default function TipPercentageForm() {
                             name="tip"
                             id={tip.id}
                             value={tip.value}
+                            onChange={(e) => setTip(Number(e.target.value))}
                         />
                     </div>
                 ))}
