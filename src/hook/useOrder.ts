@@ -9,7 +9,7 @@ export default function useOrder() {
         if (itemExist) {
             const updateOrder = order.map((orderItem) =>
                 orderItem.id === item.id
-                    ? { ...orderItem, quantity: orderItem.quantity+ 1 }
+                    ? { ...orderItem, quantity: orderItem.quantity + 1 }
                     : orderItem
             );
             setOrder(updateOrder);
@@ -18,5 +18,10 @@ export default function useOrder() {
             setOrder([...order, newItem]);
         }
     }
-    return { addItem, order };
+
+    const removeItem = (id: MenuItem["id"]) => {
+        const updateOrder = order.filter((item) => item.id !== id);
+        setOrder(updateOrder);
+    };
+    return { addItem, order, removeItem };
 }
