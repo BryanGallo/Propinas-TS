@@ -2,11 +2,12 @@ import { useMemo } from "react";
 import type { OrderItem } from "../types/index";
 import { formatCurrency } from "../helpers/index";
 
-type OrderItemPropo = {
+type OrderItemProp = {
     order: OrderItem[];
+    tip: number;
 };
 
-export default function OrderTotals({ order }: OrderItemPropo) {
+export default function OrderTotals({ order, tip }: OrderItemProp) {
     const subTotal = useMemo(
         () =>
             order.reduce(
@@ -15,6 +16,11 @@ export default function OrderTotals({ order }: OrderItemPropo) {
             ),
         [order]
     );
+
+    const tipAmount = useMemo(() => subTotal * tip, [tip, order]);
+
+    const total = useMemo(() => subTotal + tipAmount, [tip, order]);
+
     return (
         <>
             <div className="space-y-3">
@@ -26,10 +32,14 @@ export default function OrderTotals({ order }: OrderItemPropo) {
                     </span>
                 </p>
                 <p>
-                    Propina: <span className="font-bold"></span>
+                    Propina:{" "}
+                    <span className="font-bold">
+                        {formatCurrency(tipAmount)}
+                    </span>
                 </p>
                 <p>
-                    Total a pagar: <span className="font-bold"></span>
+                    Total a pagar:{" "}
+                    <span className="font-bold">{formatCurrency(total)}</span>
                 </p>
             </div>
             <button></button>
